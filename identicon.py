@@ -18,7 +18,7 @@ def explore(i, j, cases, colors):
         explore(x, y, cases, colors)
 
 
-def identicon(square_size = 16, n = 16, filename = None, show = False):
+def identicon(square_size = 16, n = 16):
     size = (square_size * n, square_size * n)
 
     im = Image.new('RGB',size)
@@ -36,18 +36,7 @@ def identicon(square_size = 16, n = 16, filename = None, show = False):
         for j in range(n):
             coordinates = [i * square_size, j * square_size, (i + 1) * square_size, (j + 1) * square_size]
             d.rectangle(coordinates, tuple(colors[i][j]))
-
-    # pix = im.load()
-    # for i in range(size[0]):
-        # for j in range(i):
-            # pix[i, j] = pix[j, i]
-
-    if show:
-    	im.show()
-    elif filename:
-    	im.save(filename)
-    else
-        return im
+    return im
 
 if __name__ == '__main__':
     import argparse,sys
@@ -63,4 +52,8 @@ if __name__ == '__main__':
     if args.seed:
         random.seed(args.seed)
 
-    identicon(args.size, args.n, args.filename, show = (args.filename == None))
+    im = identicon(args.size, args.n)
+    if args.filename:
+        im.save(args.filename)
+    else:
+        im.show()
