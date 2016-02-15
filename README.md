@@ -1,5 +1,11 @@
 # py-vizhash
-Python Visual Hash
+
+Python Visual Hash, calculate a visual random image associated with a string.
+
+## How it works ?
+
+It uses a maze [generation algorithm](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Depth-first_search)
+at each steps it changes the color of the block with a slightly random change from the previous block.
 
 ## Usage
 
