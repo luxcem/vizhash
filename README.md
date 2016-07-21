@@ -2,6 +2,12 @@
 
 Python Visual Hash, calculate a visual random image associated with a string.
 
+## Install
+
+```
+pip install py-vizhash
+```
+
 ## How it works ?
 
 It uses a maze [generation algorithm](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Depth-first_search),
