@@ -1,11 +1,11 @@
-# py-vizhash
+# vizhash
 
 Python Visual Hash, calculate a visual random image associated with a string.
 
 ## Install
 
 ```
-pip install py-vizhash
+pip install vizhash
 ```
 
 ## How it works ?
