@@ -7,12 +7,12 @@ Python Visual Hash, calculate a visual random image associated with a string.
 It uses a maze [generation algorithm](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Depth-first_search),
 at each steps it changes the color of the block with a slightly random change from the previous block.
 
-The idea was to provide a beautiful (?) unique image, I can’t guarantee the security (in terms of colisions) of the function.
+The idea was to provide a beautiful (?) unique image, I can’t guarantee the security (in terms of collisions) of the function.
 
 ## Usage
 
 ```
-usage: identicon.py [-h] [-s SEED] [-n N] [-S SIZE] [-f FILENAME]
+usage: vizhash.py [-h] [-s SEED] [-n N] [-S SIZE] [-f FILENAME]
 
 optional arguments:
   -h, --help            show this help message and exit

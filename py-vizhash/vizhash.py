@@ -2,7 +2,6 @@ from PIL import Image, ImageDraw
 import random
 import copy
 
-
 def explore(i, j, cases, colors):
     cases[i][j] = True
 
