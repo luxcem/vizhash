@@ -1,57 +1,78 @@
-from PIL import Image, ImageDraw
-import random
+import hashlib
 import copy
 
-def explore(i, j, cases, colors):
-    cases[i][j] = True
+from random import Random
 
-    cells = [(i - 1, j), (i, j + 1), (i + 1, j), (i, j - 1)]
-    random.shuffle(cells)
-    for (x, y) in cells:
-        if cases[x][y]: continue
-        color = copy.copy(colors[i][j])
-        for k in range(3):
-            color[k] += random.gauss(0, random.randint(3,20))
-            color[k] = int(max(0, min(color[k], 255)))
-        colors[x][y] = color
-        explore(x, y, cases, colors)
+from PIL import Image, ImageDraw
 
 
-def identicon(square_size = 16, n = 16):
-    size = (square_size * n, square_size * n)
+class Vizhash:
 
-    im = Image.new('RGB',size)
-    d = ImageDraw.Draw(im)
+    def __init__(self, data, square_size=16, n=16):
+        self.square_size = square_size
+        self.n = n
+        # Use the sha256 digest of the data to avoid collision on the
+        # random generator
+        seed = hashlib.sha256(data.encode("utf-8")).hexdigest()
+        self.random = Random(seed)
 
-    cases = [[False] * n + [True] for _ in range(n)] + [[True] * (n + 1)]
-    colors = [[None] * n for _ in range(n)]
+    def explore(self, i, j, cases, colors):
+        """Maze generation algorithm"""
+        cases[i][j] = True
 
+        cells = [(i - 1, j), (i, j + 1), (i + 1, j), (i, j - 1)]
+        self.random.shuffle(cells)
+        for (x, y) in cells:
+            if cases[x][y]: continue
+            color = copy.copy(colors[i][j])
+            for k in range(3):
+                color[k] += self.random.gauss(0, self.random.randint(3,20))
+                color[k] = int(max(0, min(color[k], 255)))
+            colors[x][y] = color
+            self.explore(x, y, cases, colors)
 
-    i, j = random.randrange(n), random.randrange(n)
-    colors[i][j] = [random.randint(0, 255), random.randint(0, 255), random.randint(0,255)]
-    explore(i, j, cases, colors)
+    def identicon(self):
+        n = self.n
+        size = (self.square_size * n, self.square_size * n)
 
-    for i in range(n):
-        for j in range(n):
-            coordinates = [i * square_size, j * square_size, (i + 1) * square_size, (j + 1) * square_size]
-            d.rectangle(coordinates, tuple(colors[i][j]))
-    return im
+        im = Image.new('RGB',size)
+        d = ImageDraw.Draw(im)
+
+        cases = [[False] * n + [True] for _ in range(n)] + [[True] * (n + 1)]
+        colors = [[None] * n for _ in range(n)]
+
+        i, j = self.random.randrange(n), self.random.randrange(n)
+        colors[i][j] = [
+            self.random.randint(0, 255),
+            self.random.randint(0, 255),
+            self.random.randint(0,255)
+        ]
+        self.explore(i, j, cases, colors)
+
+        for i in range(n):
+            for j in range(n):
+                coordinates = [
+                    i * self.square_size,
+                    j * self.square_size,
+                    (i + 1) * self.square_size,
+                    (j + 1) * self.square_size
+                ]
+                d.rectangle(coordinates, tuple(colors[i][j]))
+        return im
 
 if __name__ == '__main__':
     import argparse,sys
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("-s", "--seed", default=None)
+    parser.add_argument("-s", "--seed", default="")
     parser.add_argument("-n", type=int, help="Number of blocks (default : 16)", default=16)
     parser.add_argument("-S", "--size", type=int, help="Block size (default :16)", default= 16)
     parser.add_argument("-f", "--filename", help="Output", default=None)
     args = parser.parse_args()
     sys.setrecursionlimit(args.n * args.n)
 
-    if args.seed:
-        random.seed(args.seed)
-
-    im = identicon(args.size, args.n)
+    vizhash = Vizhash(args.seed, args.size, args.n)
+    im = vizhash.identicon()
     if args.filename:
         im.save(args.filename)
     else:
