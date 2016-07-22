@@ -1,1 +1,1 @@
-from vizhash import identicon
+from vizhash import Vizhash
