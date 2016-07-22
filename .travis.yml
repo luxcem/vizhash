@@ -11,4 +11,6 @@ python:
   - "pypi"
   - "pypi3"
 install:
-  - 'pip install -e .'
+  - 'pip install .'
+script:
+  - nosetests
