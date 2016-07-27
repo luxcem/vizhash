@@ -1,16 +1,26 @@
 from distutils.core import setup
+from vizhash import __version__
+
 setup(
     name = 'vizhash',
     packages = ['vizhash'],
-    version = '1.1.0',
+    version = __version__,
     description = 'Python Visual Hash, generate a visual random image associated with a string.',
     author = 'luxcem',
     author_email = 'a@luxcem.fr',
     url = 'https://github.com/luxcem/vizhash',
-    download_url = 'https://github.com/luxcem/vizhash/tarball/1.1.0',
-    keywords = ['visual hash', 'vizhash', 'random', 'maze'],
-    classifiers = [],
+    download_url = 'https://github.com/luxcem/vizhash/tarball/{}'.format(__version__),
+    keywords = 'visual hash vizhash random maze identicon',
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.2",
+        "Programming Language :: Python :: 3.3",
+        "Programming Language :: Python :: 3.4",
+    ],
     install_requires=[
         "Pillow"
     ],
+    test_require=[
+        'pytest'
+    ]
 )
