@@ -1,1 +1,1 @@
-from vizhash import Vizhash
+from vizhash.vizhash import Vizhash

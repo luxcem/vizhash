@@ -16,7 +16,7 @@ class Vizhash:
         seed = hashlib.sha256(data.encode("utf-8")).hexdigest()
         self.random = Random(seed)
 
-    def explore(self, i, j, cases, colors):
+    def _explore(self, i, j, cases, colors):
         """Maze generation algorithm"""
         cases[i][j] = True
 
@@ -29,15 +29,9 @@ class Vizhash:
                 color[k] += self.random.gauss(0, self.random.randint(3,20))
                 color[k] = int(max(0, min(color[k], 255)))
             colors[x][y] = color
-            self.explore(x, y, cases, colors)
+            self._explore(x, y, cases, colors)
 
-    def identicon(self):
-        n = self.n
-        size = (self.square_size * n, self.square_size * n)
-
-        im = Image.new('RGB',size)
-        d = ImageDraw.Draw(im)
-
+    def _get_colors(self, n):
         cases = [[False] * n + [True] for _ in range(n)] + [[True] * (n + 1)]
         colors = [[None] * n for _ in range(n)]
 
@@ -47,7 +41,16 @@ class Vizhash:
             self.random.randint(0, 255),
             self.random.randint(0,255)
         ]
-        self.explore(i, j, cases, colors)
+        self._explore(i, j, cases, colors)
+        return colors
+
+    def identicon(self):
+        n = self.n
+        colors = self._get_colors(n)
+        size = (self.square_size * n, self.square_size * n)
+
+        im = Image.new('RGB',size)
+        d = ImageDraw.Draw(im)
 
         for i in range(n):
             for j in range(n):
