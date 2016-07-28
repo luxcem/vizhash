@@ -1,5 +1,5 @@
 from distutils.core import setup
-from vizhash import __version__
+__version__ = '1.1.1'
 
 setup(
     name = 'vizhash',
