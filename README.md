@@ -4,6 +4,10 @@ Python Visual Hash, calculate a visual random image associated with a string.
 
 ## Install
 
+Vizhash is available for python >= 3.2
+
+[![Build Status](https://travis-ci.org/luxcem/vizhash.svg?branch=master)](https://travis-ci.org/luxcem/vizhash)
+
 ```
 pip install vizhash
 ```
