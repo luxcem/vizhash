@@ -20,7 +20,7 @@ setup(
     install_requires=[
         'Pillow'
     ],
-    test_require=[
+    tests_require=[
         'Pillow',
         'pytest'
     ]
