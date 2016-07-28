@@ -1,3 +1,4 @@
+import sys, argparse
 import hashlib
 import copy
 
@@ -7,7 +8,6 @@ from PIL import Image, ImageDraw
 
 
 class Vizhash:
-
     def __init__(self, data, square_size=16, n=16):
         self.square_size = square_size
         self.n = n
@@ -63,20 +63,23 @@ class Vizhash:
                 d.rectangle(coordinates, tuple(colors[i][j]))
         return im
 
-if __name__ == '__main__':
-    import argparse,sys
-    parser = argparse.ArgumentParser()
-
-    parser.add_argument("-s", "--seed", default="")
-    parser.add_argument("-n", type=int, help="Number of blocks (default : 16)", default=16)
-    parser.add_argument("-S", "--size", type=int, help="Block size (default :16)", default= 16)
-    parser.add_argument("-f", "--filename", help="Output", default=None)
-    args = parser.parse_args()
-    sys.setrecursionlimit(args.n * args.n)
-
+def main(args):
     vizhash = Vizhash(args.seed, args.size, args.n)
+    # Set recursion limit to avoid maximum recursion depth exceeded
+    # sys.setrecursionlimit(max(args.n * args.n, 64))
     im = vizhash.identicon()
     if args.filename:
         im.save(args.filename)
     else:
         im.show()
+
+def parse_args(argv):
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-s", "--seed", default="")
+    parser.add_argument("-n", type=int, help="Number of blocks (default : 16)", default=16)
+    parser.add_argument("-S", "--size", type=int, help="Block size (default :16)", default= 16)
+    parser.add_argument("-f", "--filename", help="Output", default=None)
+    return parser.parse_args(argv)
+
+if __name__ == '__main__':
+    main(parse_args(sys.argv[1:]))

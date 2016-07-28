@@ -1,5 +1,5 @@
 from distutils.core import setup
-__version__ = '1.1.1'
+__version__ = '1.1.2'
 
 setup(
     name = 'vizhash',
@@ -22,6 +22,7 @@ setup(
     ],
     tests_require=[
         'Pillow',
-        'pytest'
+        'pytest',
+        'pytest-cov'
     ]
 )
