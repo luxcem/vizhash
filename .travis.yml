@@ -9,6 +9,6 @@ python:
 install:
   - 'pip install .'
 script:
-  - py.test
+  - py.test --cov=vizhash
 after_success:
   - codecov
