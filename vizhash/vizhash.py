@@ -1,4 +1,5 @@
-import sys, argparse
+import sys
+import argparse
 import hashlib
 import copy
 
@@ -8,6 +9,7 @@ from PIL import Image, ImageDraw
 
 
 class Vizhash:
+
     def __init__(self, data, square_size=16, n=16):
         self.square_size = square_size
         self.n = n
@@ -23,10 +25,11 @@ class Vizhash:
         cells = [(i - 1, j), (i, j + 1), (i + 1, j), (i, j - 1)]
         self.random.shuffle(cells)
         for (x, y) in cells:
-            if cases[x][y]: continue
+            if cases[x][y]:
+                continue
             color = copy.copy(colors[i][j])
             for k in range(3):
-                color[k] += self.random.gauss(0, self.random.randint(3,20))
+                color[k] += self.random.gauss(0, self.random.randint(3, 20))
                 color[k] = int(max(0, min(color[k], 255)))
             colors[x][y] = color
             self._explore(x, y, cases, colors)
@@ -39,7 +42,7 @@ class Vizhash:
         colors[i][j] = [
             self.random.randint(0, 255),
             self.random.randint(0, 255),
-            self.random.randint(0,255)
+            self.random.randint(0, 255)
         ]
         self._explore(i, j, cases, colors)
         return colors
@@ -49,7 +52,7 @@ class Vizhash:
         colors = self._get_colors(n)
         size = (self.square_size * n, self.square_size * n)
 
-        im = Image.new('RGB',size)
+        im = Image.new('RGB', size)
         d = ImageDraw.Draw(im)
 
         for i in range(n):
@@ -63,6 +66,7 @@ class Vizhash:
                 d.rectangle(coordinates, tuple(colors[i][j]))
         return im
 
+
 def main(args):
     vizhash = Vizhash(args.seed, args.size, args.n)
     # Set recursion limit to avoid maximum recursion depth exceeded
@@ -73,11 +77,14 @@ def main(args):
     else:
         im.show()
 
+
 def parse_args(argv):
     parser = argparse.ArgumentParser()
     parser.add_argument("-s", "--seed", default="")
-    parser.add_argument("-n", type=int, help="Number of blocks (default : 16)", default=16)
-    parser.add_argument("-S", "--size", type=int, help="Block size (default :16)", default= 16)
+    parser.add_argument(
+        "-n", type=int, help="Number of blocks (default : 16)", default=16)
+    parser.add_argument("-S", "--size", type=int,
+                        help="Block size (default :16)", default=16)
     parser.add_argument("-f", "--filename", help="Output", default=None)
     return parser.parse_args(argv)
 
