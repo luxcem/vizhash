@@ -40,3 +40,7 @@ optional arguments:
 ![truc-26](https://cloud.githubusercontent.com/assets/876685/13054748/b35b97f6-d40b-11e5-8ac8-492046c369eb.png)
 ![truc-16](https://cloud.githubusercontent.com/assets/876685/13054749/b3fa5184-d40b-11e5-81f0-adf834992bcd.png)
 ![truc-48](https://cloud.githubusercontent.com/assets/876685/13054762/b702a368-d40b-11e5-9865-80ba6a541ad7.png)
+
+## Licence
+
+VizHash is distributed under the terms of the [LGPL-3.0](https://www.gnu.org/licenses/lgpl-3.0.en.html).

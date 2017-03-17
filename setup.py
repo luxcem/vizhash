@@ -1,5 +1,5 @@
 from distutils.core import setup
-__version__ = '1.1.2'
+__version__ = '1.2.0'
 
 setup(
     name='vizhash',
@@ -19,12 +19,5 @@ setup(
         "Programming Language :: Python :: 3.3",
         "Programming Language :: Python :: 3.4",
     ],
-    install_requires=[
-        'Pillow'
-    ],
-    tests_require=[
-        'Pillow',
-        'pytest',
-        'pytest-cov'
-    ]
-)
+    install_requires=['Pillow'],
+    tests_require=['Pillow', 'pytest', 'pytest-cov'])
