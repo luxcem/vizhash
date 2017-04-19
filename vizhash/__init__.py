@@ -1,3 +1,3 @@
-from vizhash.vizhash import Vizhash
+from .vizhash import Vizhash
 
 __version__ = '1.1.1'

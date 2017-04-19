@@ -1,10 +1,11 @@
+# -*- coding: utf-8 -*-
 import pytest
 import random
 
 import vizhash.vizhash as vizhash
 from PIL import Image
 
-some_strings = ['', 'some string', '什么什么']
+some_strings = ['', 'some string', u'什么什么']
 some_sizes = [1, 2, 5, 10]
 some_squares = [1, 2, 4, 16]
 
