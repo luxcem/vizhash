@@ -78,6 +78,10 @@ def main(args):
         im.show()
 
 
+def entrypoint():
+    main(parse_args(sys.argv[1:]))
+
+
 def parse_args(argv):
     parser = argparse.ArgumentParser()
     parser.add_argument("-s", "--seed", default="")
@@ -89,4 +93,4 @@ def parse_args(argv):
     return parser.parse_args(argv)
 
 if __name__ == '__main__':
-    main(parse_args(sys.argv[1:]))
+    entrypoint()

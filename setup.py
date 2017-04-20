@@ -1,5 +1,5 @@
 from setuptools import setup
-__version__ = '1.2.1'
+__version__ = '1.3.0'
 
 setup(
     name='vizhash',
@@ -20,4 +20,9 @@ setup(
         "Programming Language :: Python :: 3.4",
     ],
     install_requires=['Pillow'],
+    entry_points={
+        'console_scripts': [
+            'vizhash = vizhash.vizhash:entrypoint',
+        ],
+    },
     tests_require=['Pillow', 'pytest', 'pytest-cov'])
