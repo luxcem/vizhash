@@ -8,7 +8,7 @@ Vizhash is available for python >= 3.2
 
 [![Build Status](https://travis-ci.org/luxcem/vizhash.svg?branch=master)](https://travis-ci.org/luxcem/vizhash)
 [![codecov](https://codecov.io/gh/luxcem/vizhash/branch/master/graph/badge.svg)](https://codecov.io/gh/luxcem/vizhash)
-
+[![PyPI version](https://badge.fury.io/py/vizhash.svg)](https://badge.fury.io/py/vizhash)
 
 ```
 pip install vizhash
