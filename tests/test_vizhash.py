@@ -46,7 +46,7 @@ def test_identicon(seed, square_size, n):
     assert im.size == (n * square_size, n * square_size)
     assert im.mode == 'RGB'
 
-    
+
 @pytest.mark.parametrize('seed', some_strings)
 @pytest.mark.parametrize('n', some_sizes)
 @pytest.mark.parametrize('square_size', some_squares)
@@ -54,7 +54,7 @@ def test_identicon_stability(seed, square_size, n):
     vh = vizhash.Vizhash(seed, square_size, n)
     assert vh.identicon() == vh.identicon()
 
-    
+
 @pytest.mark.parametrize('seed', some_strings)
 @pytest.mark.parametrize('n', some_sizes)
 @pytest.mark.parametrize('square_size', some_squares)
