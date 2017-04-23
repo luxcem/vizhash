@@ -16,6 +16,7 @@ class Vizhash:
         # Use the sha256 digest of the data to avoid collision on the
         # random generator
         seed = hashlib.sha256(data.encode("utf-8")).hexdigest()
+        self.seed = seed
         self.random = Random(seed)
 
     def _explore(self, i, j, cases, colors):
@@ -48,6 +49,7 @@ class Vizhash:
         return colors
 
     def identicon(self):
+        self.random.seed(self.seed)
         n = self.n
         colors = self._get_colors(n)
         size = (self.square_size * n, self.square_size * n)
